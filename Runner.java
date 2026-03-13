@@ -1,34 +1,71 @@
-//Timothy Dean
-//CPSC 1302K - Computer Science II
-//Module 3 Assignment 1b
+// Module 4 Assignment 2
+// Timothy Dean
 
+//this class tests all methods in the Calc class
+//the Calc class exposes the following methods:
+//add, subtract, multiply, divide
+//user is prompted for input
 import java.util.Scanner;
-public class Runner
-{
-    public static void main(String[] args)
-    {
-        String type1 = "Dog";
-        String name1 = "Goober";
-        String sound1 = "Woof!";
-        int age1 = 7;
+public class Runner {
+    public static void main(String[] args){
+        //instantiate a Calc object
+        Calc myCalculator = new Calc();
+       
+        Scanner scan = new Scanner(System.in);
+        double n1 = 0;
+        double n2 = 0;
 
-        System.out.println("Pet Information: " + "\n" + type1);
-        System.out.println("Name: " + name1);
-        System.out.println("Sound: " + sound1);
-        System.out.println("Age: " + age1);
+        //Loop for the first number
+        while (true)
+            {
+            System.out.println("Please enter the first number: ");
+            if (scan.hasNextDouble())
+                {
+                n1 = scan.nextDouble();
+                break;
+            }
+            else
+                {
+                System.out.println("Invalid input. Please enter a number."  + "\n");
+                scan.next();
+            }
+        }
 
+        //Loop for the second number
+        while (true)
+            {
+            System.out.println("Please enter the second number: ");
+            if (scan.hasNextDouble()) 
+                {
+                n2 = scan.nextDouble();
+                break;
+            }
+            else 
+                {
+                System.out.println("Invalid input. Please enter a number."  + "\n");
+                scan.next();
+            }
+        }
 
-        Scanner input = new Scanner(System.in);
-         System.out.println("Enter Animal Type: ");
-        String type = input.nextLine();
-        System.out.println("Enter Animal Name: ");
-        String name = input.nextLine();
-        System.out.println("Enter Animal Age: ");
-        int age = input.nextInt();
+        //pass the numbers to the Calc object
+        myCalculator.setNum1(n1);
+        myCalculator.setNum2(n2);
 
-        Pet myPet = new Pet(name, type, age);
-        System.out.println(myPet.toString());
-        input.close();
+        //output from Calc instance
+        System.out.println(myCalculator);
+
+        //examining the instance private data fields by calling get methods
+        System.out.println("Calling num1 get method: " + myCalculator.getNum1());
+        System.out.println("Calling num2 get method: " + myCalculator.getNum2());
+
+        //calling Calc methods directly
+        //can use a local variable for sum if you need that value for another calculation
+        double sum = myCalculator.add();
+        System.out.println("The sum is: " + sum);
+
+        //or if you don't, then just display the difference, product and quotient
+        System.out.println("The difference is: " + myCalculator.subtract());
+        System.out.println("The product is: " + myCalculator.multiply());
+        System.out.println("The quotient is: " + myCalculator.divide());
     }
-
 }
